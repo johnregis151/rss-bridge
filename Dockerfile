@@ -4,6 +4,20 @@ LABEL description="RSS-Bridge is a PHP project capable of generating RSS and Ato
 LABEL repository="https://github.com/RSS-Bridge/rss-bridge"
 LABEL website="https://github.com/RSS-Bridge/rss-bridge"
 
+FROM php:8.2-cli
+
+# Set working directory
+WORKDIR /app
+
+# Copy files
+COPY . /app
+
+# Expose port 8080 (Render's default)
+EXPOSE 8080
+
+# Start built-in PHP server
+CMD ["php", "-S", "0.0.0.0:8080", "-t", "."]
+
 ARG DEBIAN_FRONTEND=noninteractive
 RUN set -xe && \
     apt-get update && \
