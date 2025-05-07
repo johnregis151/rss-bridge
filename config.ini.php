@@ -1,7 +1,7 @@
 ; <?php exit; ?> DO NOT REMOVE THIS LINE
 
 [system]
-enabled_bridges[] = Twitter
+enabled_bridges[] = Nitter
 
 [cache]
 type = "file"
