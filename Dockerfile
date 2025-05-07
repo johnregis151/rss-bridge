@@ -1,24 +1,22 @@
 FROM php:8.2-cli
 
-# Install PHP extensions the right way
+# Install required packages and PHP extensions
 RUN apt-get update && apt-get install -y \
+    unzip \
     libxml2-dev \
     libsqlite3-dev \
-    unzip \
+    libicu-dev \
+    libonig-dev \
+    build-essential \
+    pkg-config \
  && docker-php-ext-install \
     mbstring \
     intl \
     pdo_sqlite \
- && rm -rf /var/lib/apt/lists/*
+ && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Set working directory
 WORKDIR /app
-
-# Copy RSS-Bridge files
 COPY . .
 
-# Expose port
 EXPOSE 8080
-
-# Start PHP's built-in server
 CMD ["php", "-S", "0.0.0.0:8080", "-t", "."]
